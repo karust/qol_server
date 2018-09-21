@@ -1,0 +1,39 @@
+Client->Server:
+n  	  -0Command-     	-Data-
+1		CHECK 		| --
+2		BEGIN 		| 1-end[char_name]
+3		END	  		| 1-end[char_name]
+4		SET_XYD 	| 1-4[x] 5-8[y] 9-12[rotation] 13[d] 14-end[char_name]
+5  	  	BEGIN_OK 	| 1-end["OK"]
+6	  	PLAYER_END_OK| 1-end["OK"+same_data]
+7		HIT			| 1[type of attack] 2-5[x] 6-9[y] 10[npc or player] 11-end[id or name]
+8		DROP_TAKEN  | 1-4[id] 5-8[id_ex]
+9		INV_UPDATED | 1-end[same_data]
+10		ITEM_USED	| 1-4[id] 5-8[id_ex]
+11		GROCERY_BUY | 1-4[id]
+12		TAKE_QUEST 	| 1-4[Q_ID] 5-8[NPC_ID]
+13		QUESTS_ALL	| 1-end[same_data]
+14		QUEST_UPDATED	| 1-end[same_data]
+15		NPCxyd_REQUEST	| 1-end[same_data]
+
+Server->Client:
+ n    -0Command-     	-Data-
+255		ALIVE		| --
+254		STARTED 	| 1[id]
+253		DENIED		| 1[reason]
+252		SUCCESSFUL  | 1[reason]
+251		CH_XYD  	| 1-4[x] 5-8[y] 9-12[rotation] 13[d] 14-17[hp] 18-end[char_name]
+--250		PLAYER_INFO	| 1[lvl] 2-5[maxHP] 6-end[charname]	
+249		PLAYER_END	| 1-end[charname]
+248		MOB_XYD		| 1-4[x] 5-8[y] 9-12[rotation] 13[d] 14-17[hp] 18-21[type] 22-end[id]
+247		DROP_SET 	| 1-4[x] 5-8[y] 9-12[item] 13-16[quantity] 17-end[id_ex]	
+246 	SEND_MYXYD	| 1-4[x] 5-8[y] 9-12[rotation] 13[d] 14-17[hp] 17-end[char_name]
+245		PICK_UP_OK	| 1-end["OK"+same_data]
+244		DEL_DROP	| 1-4[id_ex]
+243		ALL_QUESTS	| 1-4[q_all] 5-8[id] 9-12[stage] 13-16[q]... 
+242     INV_UPDATE  	| 1-4[q_all] 5-8[id] 9-12[ex] 13-16[q]...
+241		QUEST_UPD	| 1-4[id] 5-8[st] 9-12[q]
+240 	NPC_XYD		| 1-4[x] 5-8[y] 9-12[rotation] 13[d] 14-17[id] 18-end[char_name]
+
+0 - Andrea
+1 - Vendor
